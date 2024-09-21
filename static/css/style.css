@@ -1,0 +1,120 @@
+/* General Styles */
+#youtubeInput {
+    display: inline-block !important;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+}
+/* Video Background */
+#videoBackground {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;  /* Behind the content */
+}
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1{
+    font-family: 'Roboto', sans-serif;  /* Simple, modern font */
+    color: rgba(249, 150, 8);
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px #000;  /* Subtle shadow */
+}
+
+
+
+/* Form Styles */
+.upload-form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+input[type="file"],
+input[type="submit"] {
+    padding: 10px;
+    margin: 10px;
+    background-color: #1E1E1E;
+    border: 2px solid #0AF;
+    border-radius: 5px;
+    color: #0AF;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #252525;
+    color: #0CF;
+}
+
+/* Video Controls */
+.video-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Video Container */
+#videoContainer {
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+}
+
+#videoPlayer {
+    width: 100%;
+    border: 1px solid #080808;
+    background-color: #000000;
+}
+
+#canvasOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.container {
+    position: relative;
+}
+
+.upload-form {
+    display: none;
+    position: absolute;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.upload-form.active {
+    display: block;
+}
+
+#localUploadForm {
+    transform: translateX(0);
+}
+
+#youtubeUploadForm {
+    transform: translateX(100%);
+}
+
+.switch-button {
+    cursor: pointer;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #0AF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.switch-button:hover {
+    background-color: #455da0;
+}

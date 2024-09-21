@@ -1,0 +1,9 @@
+pillow
+requests
+flask
+opencv-python
+pytesseract
+numpy
+pytube
+flask-socketio
+yt_dlp

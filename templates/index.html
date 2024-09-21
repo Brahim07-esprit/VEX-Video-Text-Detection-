@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VEX Video To Text</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/vex_icon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="../static/js/video_processing.js"></script>
+</head>
+
+<body id="bodyElement">
+    <!-- Video Background -->
+    <video autoplay loop muted id="videoBackground">
+        <source src="../static/videos/BackGround.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+        <h1>Video Text Detector</h1>
+
+        <!-- Switch Button -->
+    
+
+        <!-- Video upload form -->
+        <div id="localUploadForm" class="upload-form active">
+            <button class="switch-button" onclick="toggleUploadForm()">Switch Upload Method</button>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="video_file" accept="video/mp4">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+
+        <!-- YouTube video link input form -->
+        <div id="youtubeUploadForm" class="upload-form">
+            <button class="switch-button" onclick="toggleUploadForm()">Switch Upload Method</button>
+            <form action="/upload_youtube" method="post">
+                <input type="text" name="youtube_link" placeholder="Enter YouTube link">
+                <input type="submit" value="Upload YouTube Video">
+            </form>
+        </div>
+
+        <!-- Video player and canvas overlay -->
+        {% if video_uploaded %}
+        <div class="video-controls">
+            <button id="detectText">Detect Text</button>
+            <button id="clearCanvas">Clear Canvas</button>
+        </div>
+        <div id="videoContainer">
+            <video id="videoPlayer" controls width="600">
+                Your browser does not support the video tag.
+            </video>
+            <canvas id="canvasOverlay"></canvas>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleUploadForm() {
+            const localForm = document.getElementById('localUploadForm');
+            const youtubeForm = document.getElementById('youtubeUploadForm');
+
+            if (localForm.classList.contains('active')) {
+                localForm.classList.remove('active');
+                youtubeForm.classList.add('active');
+                localForm.style.transform = 'translateX(-100%)';
+                youtubeForm.style.transform = 'translateX(0)';
+            } else {
+                youtubeForm.classList.remove('active');
+                localForm.classList.add('active');
+                youtubeForm.style.transform = 'translateX(100%)';
+                localForm.style.transform = 'translateX(0)';
+            }
+        }
+    </script>
+</body>
+
+</html>
