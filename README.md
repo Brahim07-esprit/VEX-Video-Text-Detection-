@@ -75,9 +75,13 @@ pip install -r requirements.txt
 Usage
 -----
 
-1.  bashCopy codepython app.py
+1. **Run the Application**
+```bash
+python app.py
+```
     
-2.  Open your browser and navigate to http://localhost:5000.
+2.  **Access the Web Interface**
+Open your browser and navigate to `http://localhost:5000`
     
 3.  **Upload a Video**
     
