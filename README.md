@@ -1,77 +1,75 @@
 VEX (Video Text Detection)
 ==========================
 
-An interactive web application that allows users to extract text from selected video frames with high accuracy.
+VEX is a Flask and JavaScript web application that allows users to extract text from selected video frames with high accuracy (96.3%). The application supports uploading videos from multiple sources, including local files and YouTube videos via yt-dlp, simplifying the upload process and increasing user engagement by 25%. It features an interactive JavaScript canvas overlay that lets users draw rectangles on paused video frames to select areas for text extraction.
+
+Demo
+----
+
+[Click here to watch the video demonstration.](https://github.com/user-attachments/assets/c23f2ae7-f63d-41f0-a62c-79f87f3a51e3)
 
 Features
 --------
 
-*   **High Accuracy Text Extraction**: Utilizes Pytesseract to extract text from video frames with an accuracy of 96.3%.
+*   **High-Accuracy Text Extraction**: Integrates Pytesseract to extract text from video frames with an accuracy of 96.3%.
     
-*   **Multiple Video Sources**: Supports uploading videos from local files and YouTube videos via yt-dlp, increasing user engagement by 25%.
+*   **Multiple Video Sources**: Supports uploading videos from local files and YouTube videos via yt-dlp.
     
-*   **Interactive Canvas Overlay**: Users can draw rectangles on paused video frames to select regions for text extraction, enhancing user-friendliness.
+*   **Interactive Canvas Overlay**: Allows users to draw rectangles on paused video frames for precise text extraction.
+    
+*   **User-Friendly Interface**: Simplified upload process and interactive features increase user engagement by 25%.
     
 
-Table of Contents
------------------
+Requirements
+------------
 
-*   [Installation](#installation)
+Ensure you have the following packages installed:
+
+*   pillow
     
-    *   [Prerequisites](#prerequisites)
-        
-    *   [Dependencies](#dependencies)
-        
-    *   [Setup](#setup)
-        
-*   [Usage](#usage)
+*   requests
     
-*   [Project Structure](#project-structure)
+*   flask
     
-    *   [app.py](#apppy)
-        
-    *   [video\_processing.js](#video_processingjs)
-        
-    *   [index.html](#indexhtml)
-        
-*   [Contributing](#contributing)
+*   opencv-python
     
-*   [License](#license)
+*   pytesseract
     
-*   [Contact](#contact)
+*   numpy
+    
+*   pytube
+    
+*   flask-socketio
+    
+*   yt\_dlp
     
 
 Installation
 ------------
 
-### Prerequisites
-
-*   **Python 3.6+**
+1. **Clone the Repository** 
+```bash
+git clone https://github.com/yourusername/vex-video-text-detection.gitcd vex-video-text-detection
+```
     
-*   **pip** (Python package installer)
+2. **Create a Virtual Environment (Recommended)**
+```bash 
+python3 -m venv venv
+source venv/bin/activate # On Windows, use \`venv\\Scripts\\activate\`
+```
     
-
-### Dependencies
-
-Install the required packages using the following command:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepip install pillow requests flask opencv-python pytesseract numpy pytube flask-socketio yt_dlp   `
-
-Alternatively, install them from the requirements.txt file (if provided):
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepip install -r requirements.txt   `
-
-### Setup
-
-1.  bashCopy codegit clone https://github.com/yourusername/VEX.gitcd VEX
+3.  Install Dependencies
+```bash 
+pip install -r requirements.txt
+```
     
-2.  **Install Tesseract OCR:**
+4.  **Install Tesseract-OCR**
     
-    *   **Windows:** Download the installer from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki).
-        
-    *   bashCopy codebrew install tesseract
+    *   **Windows**: Download the installer from [here](https://github.com/UB-Mannheim/tesseract/wiki).
         
     *   bashCopy codesudo apt-get install tesseract-ocr
+        
+    *   bashCopy codebrew install tesseract
         
 
 Usage
@@ -79,91 +77,82 @@ Usage
 
 1.  bashCopy codepython app.py
     
-2.  Open your web browser and navigate to http://localhost:5000.
+2.  Open your browser and navigate to http://localhost:5000.
     
-3.  **Upload a video:**
+3.  **Upload a Video**
     
-    *   **Local File:** Click on "Choose File" and select an MP4 video.
+    *   **Local File**: Use the local upload form to select and upload an MP4 video file from your computer.
         
-    *   **YouTube Video:** Enter a YouTube video URL and click "Upload YouTube Video".
+    *   **YouTube Video**: Switch to the YouTube upload form and enter a YouTube video link to upload.
         
-4.  **Extract Text:**
+4.  **Extract Text from Video Frames**
     
     *   Play the video and pause at the desired frame.
         
-    *   Click on "Detect Text" to enable the canvas overlay.
+    *   Click the **Detect Text** button.
         
-    *   Draw a rectangle around the text area.
+    *   Draw a rectangle over the area containing text.
         
-    *   Click on the "Copy" button to copy the extracted text to your clipboard.
+    *   Click the **Copy** button to copy the extracted text to your clipboard.
+        
+    *   Use the **Clear Canvas** button to reset the canvas.
         
 
-Project Structure
------------------
+File Structure
+--------------
 
-### app.py
-
-The main Flask application handling routes for:
-
-*   Home page (/)
+*   **app.py**: Main Flask application handling routes, video uploads, and text detection.
     
-*   Video upload (/upload)
+*   **templates/index.html**: HTML template for the main page.
     
-*   YouTube video processing (/upload\_youtube)
+*   **static/js/video\_processing.js**: JavaScript for video playback, canvas interactions, and AJAX requests.
     
-*   Video streaming (/video)
+*   **static/css/style.css**: Stylesheet for the application's UI.
     
-*   Text detection (/detect\_text)
-    
-*   Extracting text within a selected rectangle (/extract\_text\_in\_rectangle)
+*   **requirements.txt**: List of all required Python packages.
     
 
-### video\_processing.js
+Dependencies
+------------
 
-Handles the front-end logic for:
-
-*   Video playback and pause events
+*   **Backend**:
     
-*   Drawing rectangles on a canvas overlay
+    *   Flask
+        
+    *   OpenCV
+        
+    *   Pytesseract
+        
+    *   yt-dlp
+        
+*   **Frontend**:
     
-*   Communicating with the back-end to detect and extract text
-    
-*   Copying extracted text to the clipboard
-    
-
-### index.html
-
-The main HTML template containing:
-
-*   Video upload forms (local and YouTube)
-    
-*   Video player and canvas overlay
-    
-*   JavaScript and CSS references
-    
+    *   JavaScript (ES6)
+        
+    *   HTML5 Canvas
+        
+    *   CSS3
+        
 
 Contributing
 ------------
 
-Contributions are welcome! Please follow these steps:
-
-1.  **Fork the repository.**
-    
-2.  bashCopy codegit checkout -b feature/YourFeature
-    
-3.  bashCopy codegit commit -m "Add your message"
-    
-4.  bashCopy codegit push origin feature/YourFeature
-    
-5.  **Open a pull request.**
-    
+Contributions are welcome! Please open an issue or submit a pull request for any improvements.
 
 License
 -------
 
-_Specify the license under which the project is distributed._
+[MIT License](LICENSE)
 
-Contact
--------
+Acknowledgements
+----------------
 
-Brahim Abdelbeki - brahim.abdelbeki@esprit.tn
+*   [Pytesseract](https://github.com/madmaze/pytesseract)
+    
+*   [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+    
+*   [OpenCV](https://opencv.org/)
+    
+*   Flask
+    
+*   [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
